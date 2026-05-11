@@ -1,4 +1,4 @@
-﻿{
+{
   "scripts": {
     "docs:dev": "vitepress docs --host 0.0.0.0",
     "docs:build": "vitepress build docs",
