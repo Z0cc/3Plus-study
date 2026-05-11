@@ -1,3 +1,2 @@
 # 3Plus-study
-广东3+证书高职高考数学、英语、语文速查知识库
-仅供测试与学习使用，不完善。
+testtesttesttesttesttesttesttesttesttesttesttesttesttest
