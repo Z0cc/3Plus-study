@@ -9,12 +9,12 @@ import patternsRaw from '../../../data/english/sentence-patterns.json'
 
 const query = ref('')
 const categories = [
-  { title: '高频词汇', text: '单词与翻译', link: '/english/words', count: wordsRaw.length },
-  { title: '固定短语', text: '短语与翻译', link: '/english/phrases', count: phrasesRaw.length },
-  { title: '不规则动词', text: '原形、过去式、过去分词、中文', link: '/english/irregular-verbs', count: verbsRaw.length },
-  { title: '英语语法', text: '原版 english-note 语法页面', link: '/english/grammar', count: '原站' },
-  { title: '完成句子', text: '英文与中文', link: '/english/completion', count: completionRaw.length },
-  { title: '高频句型', text: '重要句型100条', link: '/english/sentence-patterns', count: patternsRaw.length }
+  { title: '高频词汇', text: '单词与翻译', link: '/english/words', count: wordsRaw.length, suffix: '条' },
+  { title: '固定短语', text: '短语与翻译', link: '/english/phrases', count: phrasesRaw.length, suffix: '条' },
+  { title: '不规则动词', text: '原形、过去式、过去分词、中文', link: '/english/irregular-verbs', count: verbsRaw.length, suffix: '条' },
+  { title: '英语语法', text: '原版 english-note 语法页面', link: '/english/grammar', count: '原站', suffix: '' },
+  { title: '完成句子', text: '英文与中文', link: '/english/completion', count: completionRaw.length, suffix: '条' },
+  { title: '高频句型', text: '重要句型100条', link: '/english/sentence-patterns', count: patternsRaw.length, suffix: '条' }
 ]
 
 function pair(item, fallbackTerm, fallbackTranslation) {
@@ -59,7 +59,7 @@ const results = computed(() => {
 
   <div class="category-grid">
     <a v-for="item in categories" :key="item.title" class="study-card" :href="withBase(item.link)">
-      <span class="card-kicker">{{ item.count }} 条</span>
+      <span class="card-kicker">{{ item.count }}{{ item.suffix }}</span>
       <strong>{{ item.title }}</strong>
       <span class="card-note">{{ item.text }}</span>
     </a>
