@@ -1,0 +1,8 @@
+[
+  { "base": "be", "past": "was/were", "pastParticiple": "been", "meaning": "是，成为" },
+  { "base": "begin", "past": "began", "pastParticiple": "begun", "meaning": "开始" },
+  { "base": "do", "past": "did", "pastParticiple": "done", "meaning": "做" },
+  { "base": "go", "past": "went", "pastParticiple": "gone", "meaning": "去" },
+  { "base": "have", "past": "had", "pastParticiple": "had", "meaning": "有，吃，进行" },
+  { "base": "make", "past": "made", "pastParticiple": "made", "meaning": "制作，使得" }
+]
