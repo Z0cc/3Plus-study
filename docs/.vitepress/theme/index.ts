@@ -8,8 +8,10 @@ import WordList from './components/WordList.vue'
 import PhraseList from './components/PhraseList.vue'
 import IrregularVerbTable from './components/IrregularVerbTable.vue'
 import GrammarLibrary from './components/GrammarLibrary.vue'
+import GrammarOriginal from './components/GrammarOriginal.vue'
 import SimpleDataPage from './components/SimpleDataPage.vue'
 import ThemeToneToggle from './components/ThemeToneToggle.vue'
+import BackButton from './components/BackButton.vue'
 
 export default {
   extends: DefaultTheme,
@@ -26,6 +28,9 @@ export default {
     app.component('PhraseList', PhraseList)
     app.component('IrregularVerbTable', IrregularVerbTable)
     app.component('GrammarLibrary', GrammarLibrary)
+    app.component('GrammarOriginal', GrammarOriginal)
     app.component('SimpleDataPage', SimpleDataPage)
+    app.component('ThemeToneToggle', ThemeToneToggle)
+    app.component('BackButton', BackButton)
   }
 }
