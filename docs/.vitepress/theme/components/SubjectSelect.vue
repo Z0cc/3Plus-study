@@ -9,6 +9,7 @@ const subjects = [
 </script>
 
 <template>
+  <BackButton />
   <div class="subject-grid">
     <a
       v-for="subject in subjects"
