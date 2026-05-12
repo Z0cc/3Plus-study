@@ -12,5 +12,8 @@ function goBack() {
 </script>
 
 <template>
-  <button type="button" class="back-button" @click="goBack">返回上一页</button>
+  <div class="page-actions">
+    <button type="button" class="back-button" @click="goBack">返回上一页</button>
+    <a class="back-button" :href="withBase('/')">首页</a>
+  </div>
 </template>
