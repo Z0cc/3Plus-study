@@ -1,3 +1,5 @@
 # 高频词汇
 
-<WordList />
+<BackButton />
+
+该模块已暂时移除。
