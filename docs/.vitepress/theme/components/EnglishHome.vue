@@ -14,14 +14,18 @@ const categories = [
 ]
 
 function pair(item, fallbackTerm, fallbackTranslation) {
-  if (Array.isArray(item)) return { term: item[0], translation: item[1] }
-  return { term: item[fallbackTerm], translation: item[fallbackTranslation] }
+  if (Array.isArray(item)) return { term: item[0], translation: item[1], extra: '' }
+  return {
+    term: item.term || item[fallbackTerm],
+    translation: item.meaning || item[fallbackTranslation],
+    extra: Array.isArray(item.examples) ? item.examples.join(' ') : ''
+  }
 }
 
 const pool = [
   ...verbsRaw.map(item => {
     const row = Array.isArray(item) ? item : [item.base, item.past, item.pastParticiple, item.meaning]
-    return { type: '动词', term: `${row[0]} - ${row[1]} - ${row[2]}`, translation: row[3], link: '/english/irregular-verbs' }
+    return { type: '动词', term: `${row[0]} - ${row[1]} - ${row[2]}`, translation: row[3], extra: '', link: '/english/irregular-verbs' }
   }),
   ...completionRaw.map(item => ({ type: '完成句子', ...pair(item, 'title', 'content'), link: '/english/completion' })),
   ...patternsRaw.map(item => ({ type: '句型', ...pair(item, 'title', 'content'), link: '/english/sentence-patterns' }))
@@ -30,7 +34,7 @@ const pool = [
 const results = computed(() => {
   const key = query.value.trim().toLowerCase()
   if (!key) return []
-  return pool.filter(item => `${item.term} ${item.translation}`.toLowerCase().includes(key)).slice(0, 20)
+  return pool.filter(item => `${item.term} ${item.translation} ${item.extra}`.toLowerCase().includes(key)).slice(0, 20)
 })
 </script>
 
