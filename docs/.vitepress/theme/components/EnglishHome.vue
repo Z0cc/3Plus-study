@@ -1,54 +1,59 @@
 <script setup>
 import { computed, ref } from 'vue'
 import { withBase } from 'vitepress'
-import words from '../../../data/english/words.json'
-import phrases from '../../../data/english/phrases.json'
-import verbs from '../../../data/english/irregular-verbs.json'
-import grammar from '../../../data/english/grammar.json'
-import completion from '../../../data/english/completion.json'
-import patterns from '../../../data/english/sentence-patterns.json'
+import wordsRaw from '../../../data/english/words.json'
+import phrasesRaw from '../../../data/english/phrases.json'
+import verbsRaw from '../../../data/english/irregular-verbs.json'
+import completionRaw from '../../../data/english/completion.json'
+import patternsRaw from '../../../data/english/sentence-patterns.json'
 
 const query = ref('')
 const categories = [
-  { title: '高频词汇', text: '单词、词性、搭配、考法', link: '/english/words', count: words.length },
-  { title: '固定短语', text: '短语含义、用法、考点', link: '/english/phrases', count: phrases.length },
-  { title: '不规则动词', text: '原形、过去式、过去分词', link: '/english/irregular-verbs', count: verbs.length },
-  { title: '英语语法', text: '来自 english-note 等资料的复习版', link: '/english/grammar', count: grammar.length },
-  { title: '完成句子', text: '常考结构与同义转换', link: '/english/completion', count: completion.length },
-  { title: '高频句型', text: '可直接用于复习的句型', link: '/english/sentence-patterns', count: patterns.length }
+  { title: '高频词汇', text: '单词与翻译', link: '/english/words', count: wordsRaw.length },
+  { title: '固定短语', text: '短语与翻译', link: '/english/phrases', count: phrasesRaw.length },
+  { title: '不规则动词', text: '原形、过去式、过去分词、中文', link: '/english/irregular-verbs', count: verbsRaw.length },
+  { title: '英语语法', text: '原版 english-note 语法页面', link: '/english/grammar', count: '原站' },
+  { title: '完成句子', text: '英文与中文', link: '/english/completion', count: completionRaw.length },
+  { title: '高频句型', text: '重要句型100条', link: '/english/sentence-patterns', count: patternsRaw.length }
 ]
 
+function pair(item, fallbackTerm, fallbackTranslation) {
+  if (Array.isArray(item)) return { term: item[0], translation: item[1] }
+  return { term: item[fallbackTerm], translation: item[fallbackTranslation] }
+}
+
 const pool = [
-  ...words.map(item => ({ type: '单词', title: item.word, text: item.meaning, link: '/english/words', raw: item })),
-  ...phrases.map(item => ({ type: '短语', title: item.phrase, text: item.meaning, link: '/english/phrases', raw: item })),
-  ...verbs.map(item => ({ type: '动词', title: `${item.base} - ${item.past} - ${item.pastParticiple}`, text: item.meaning, link: '/english/irregular-verbs', raw: item })),
-  ...grammar.map(item => ({ type: '语法', title: item.title, text: item.plain, link: '/english/grammar', raw: item })),
-  ...completion.map(item => ({ type: '完成句子', title: item.title, text: item.content, link: '/english/completion', raw: item })),
-  ...patterns.map(item => ({ type: '句型', title: item.title, text: item.content, link: '/english/sentence-patterns', raw: item }))
+  ...wordsRaw.map(item => ({ type: '单词', ...pair(item, 'word', 'meaning'), link: '/english/words', raw: item })),
+  ...phrasesRaw.map(item => ({ type: '短语', ...pair(item, 'phrase', 'meaning'), link: '/english/phrases', raw: item })),
+  ...verbsRaw.map(item => {
+    const row = Array.isArray(item) ? item : [item.base, item.past, item.pastParticiple, item.meaning]
+    return { type: '动词', term: `${row[0]} - ${row[1]} - ${row[2]}`, translation: row[3], link: '/english/irregular-verbs', raw: item }
+  }),
+  ...completionRaw.map(item => ({ type: '完成句子', ...pair(item, 'title', 'content'), link: '/english/completion', raw: item })),
+  ...patternsRaw.map(item => ({ type: '句型', ...pair(item, 'title', 'content'), link: '/english/sentence-patterns', raw: item }))
 ]
 
 const results = computed(() => {
   const key = query.value.trim().toLowerCase()
   if (!key) return []
-  return pool.filter(item => JSON.stringify(item.raw).toLowerCase().includes(key)).slice(0, 12)
+  return pool.filter(item => `${item.term} ${item.translation}`.toLowerCase().includes(key)).slice(0, 20)
 })
 </script>
 
 <template>
+  <BackButton />
   <section class="module-head">
     <div>
-      <p class="eyebrow">English Library</p>
       <h2>英语学习库</h2>
-      <p>按词汇、短语、语法和题型整理，适合长期复习。</p>
     </div>
-    <input v-model="query" class="study-search" placeholder="搜索单词、中文、短语、标签、语法标题" />
+    <input v-model="query" class="study-search" placeholder="搜索单词、中文、短语、句型" />
   </section>
 
   <div v-if="results.length" class="result-panel">
-    <a v-for="item in results" :key="item.type + item.title" :href="withBase(item.link)" class="result-row">
+    <a v-for="item in results" :key="item.type + item.term" :href="withBase(item.link)" class="result-row">
       <span>{{ item.type }}</span>
-      <strong>{{ item.title }}</strong>
-      <em>{{ item.text }}</em>
+      <strong>{{ item.term }}</strong>
+      <em>{{ item.translation }}</em>
     </a>
   </div>
 
