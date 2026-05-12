@@ -1,7 +1,7 @@
 [
   {
     "title": "十大词性入门",
-    "source": "hzpt-inet-club/english-note/docs/guide/grammar.md",
+    "source": "本地语法文件 english-note-master/docs/guide/grammar.md",
     "tags": ["语法体系", "词性", "基础"],
     "plain": "先分清单词在句子里承担什么功能，再判断它的词性。",
     "forms": ["实词：名词、动词、形容词、副词", "虚词：冠词、介词、连词", "其他：代词、数词、感叹词"],
@@ -11,7 +11,7 @@
   },
   {
     "title": "八大句子成分",
-    "source": "hzpt-inet-club/english-note/docs/guide/sentence.md",
+    "source": "本地语法文件 english-note-master/docs/guide/sentence.md",
     "tags": ["句子成分", "基础"],
     "plain": "句子成分就是句子里每一块内容承担的任务。",
     "forms": ["主语 + 谓语 + 宾语", "定语修饰名词", "状语说明时间、地点、原因、方式等"],
@@ -21,7 +21,7 @@
   },
   {
     "title": "in / on / at 表示位置",
-    "source": "hzpt-inet-club/english-note/docs/guide/preposition.md",
+    "source": "本地语法文件 english-note-master/docs/guide/preposition.md",
     "tags": ["介词", "易混词"],
     "plain": "in 强调内部，on 强调表面，at 把地点看成一个点。",
     "forms": ["in + 较大范围或内部空间", "on + 表面、楼层、道路", "at + 具体地点或点位"],
@@ -31,12 +31,42 @@
   },
   {
     "title": "副词的位置与作用",
-    "source": "hzpt-inet-club/english-note/docs/guide/adverb.md",
+    "source": "本地语法文件 english-note-master/docs/guide/adverb.md",
     "tags": ["副词", "词性"],
     "plain": "副词主要修饰动词、形容词、副词或整个句子。",
     "forms": ["形容词 + ly 常构成副词", "副词修饰形容词时通常放在形容词前", "enough 作副词时常后置"],
     "examPoint": "常考形容词和副词的选择，以及 enough 的位置。",
     "mistake": "不要把 friendly、lovely 这类以 ly 结尾的形容词误当副词。",
     "quiz": ["careful 的副词形式是什么？", "old enough 中 enough 为什么放后面？"]
+  },
+  {
+    "title": "形容词和名词的关系",
+    "source": "本地语法文件 english-note-master/docs/guide/adjectiveToNoun.md",
+    "tags": ["形容词", "名词", "词形转换"],
+    "plain": "形容词常用来修饰名词，很多形容词也能转换成对应名词。",
+    "forms": ["adj. + noun", "important → importance", "different → difference"],
+    "examPoint": "高职高考常考形容词和名词之间的词形转换。",
+    "mistake": "不要在需要名词的位置直接填形容词。",
+    "quiz": ["important 的名词形式是什么？", "different 的名词形式是什么？"]
+  },
+  {
+    "title": "比较级基础",
+    "source": "本地语法文件 english-note-master/docs/guide/compare.md",
+    "tags": ["比较级", "形容词", "副词"],
+    "plain": "比较级用于比较两者，通常表示“更……”。",
+    "forms": ["形容词/副词 + er", "more + 多音节形容词/副词", "than 引出比较对象"],
+    "examPoint": "常考比较级形式、than 搭配和原级/比较级转换。",
+    "mistake": "不要把 more 和 -er 重复使用。",
+    "quiz": ["beautiful 的比较级怎么写？", "taller 后面常接哪个词引出比较对象？"]
+  },
+  {
+    "title": "五个常用句型",
+    "source": "本地语法文件 english-note-master/docs/guide/giant.md",
+    "tags": ["句型", "基础", "完成句子"],
+    "plain": "掌握常见句型能帮助判断句子缺哪一块内容。",
+    "forms": ["主语 + 谓语", "主语 + 谓语 + 宾语", "主语 + 系动词 + 表语"],
+    "examPoint": "常用于完成句子、句型转换和语法选择。",
+    "mistake": "不要只看中文顺序，要先判断英语句子结构。",
+    "quiz": ["主系表结构里的表语通常说明什么？", "主谓宾结构中宾语是什么？"]
   }
 ]
