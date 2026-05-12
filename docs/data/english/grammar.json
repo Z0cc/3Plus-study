@@ -1,0 +1,42 @@
+[
+  {
+    "title": "十大词性入门",
+    "source": "hzpt-inet-club/english-note/docs/guide/grammar.md",
+    "tags": ["语法体系", "词性", "基础"],
+    "plain": "先分清单词在句子里承担什么功能，再判断它的词性。",
+    "forms": ["实词：名词、动词、形容词、副词", "虚词：冠词、介词、连词", "其他：代词、数词、感叹词"],
+    "examPoint": "常通过词形转换、选词填空和句子成分判断来考。",
+    "mistake": "不要只背中文意思，同一个词在不同句子里可能词性不同。",
+    "quiz": ["important 通常是什么词性？", "副词通常可以修饰哪些词？"]
+  },
+  {
+    "title": "八大句子成分",
+    "source": "hzpt-inet-club/english-note/docs/guide/sentence.md",
+    "tags": ["句子成分", "基础"],
+    "plain": "句子成分就是句子里每一块内容承担的任务。",
+    "forms": ["主语 + 谓语 + 宾语", "定语修饰名词", "状语说明时间、地点、原因、方式等"],
+    "examPoint": "常用于判断句子缺什么成分，从而选择正确词形或结构。",
+    "mistake": "不要把词性和句子成分混为一谈，名词可以当主语，也可以当宾语。",
+    "quiz": ["主语通常表示什么？", "状语常说明哪些信息？"]
+  },
+  {
+    "title": "in / on / at 表示位置",
+    "source": "hzpt-inet-club/english-note/docs/guide/preposition.md",
+    "tags": ["介词", "易混词"],
+    "plain": "in 强调内部，on 强调表面，at 把地点看成一个点。",
+    "forms": ["in + 较大范围或内部空间", "on + 表面、楼层、道路", "at + 具体地点或点位"],
+    "examPoint": "常在完成句子和单项选择中考介词搭配。",
+    "mistake": "不要看到中文“在”就统一写 in。",
+    "quiz": ["在教室里通常用哪个介词？", "at the gate 中 at 表示什么感觉？"]
+  },
+  {
+    "title": "副词的位置与作用",
+    "source": "hzpt-inet-club/english-note/docs/guide/adverb.md",
+    "tags": ["副词", "词性"],
+    "plain": "副词主要修饰动词、形容词、副词或整个句子。",
+    "forms": ["形容词 + ly 常构成副词", "副词修饰形容词时通常放在形容词前", "enough 作副词时常后置"],
+    "examPoint": "常考形容词和副词的选择，以及 enough 的位置。",
+    "mistake": "不要把 friendly、lovely 这类以 ly 结尾的形容词误当副词。",
+    "quiz": ["careful 的副词形式是什么？", "old enough 中 enough 为什么放后面？"]
+  }
+]
