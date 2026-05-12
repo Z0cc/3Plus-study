@@ -1,0 +1,46 @@
+[
+  {
+    "word": "important",
+    "phonetic": "",
+    "meaning": "重要的",
+    "partOfSpeech": "adj.",
+    "phrases": ["be important to sb."],
+    "example": "",
+    "examPoint": "名词形式是 importance，常见于词形转换。",
+    "mistake": "important 是形容词，不要误写成副词 importantly。",
+    "tags": ["高频词", "完成句子"]
+  },
+  {
+    "word": "able",
+    "phonetic": "",
+    "meaning": "能够的，有能力的",
+    "partOfSpeech": "adj.",
+    "phrases": ["be able to do sth."],
+    "example": "",
+    "examPoint": "常考 be able to 与 can 的近义替换。",
+    "mistake": "able 前通常要有 be 动词。",
+    "tags": ["高频词", "固定搭配"]
+  },
+  {
+    "word": "agree",
+    "phonetic": "",
+    "meaning": "同意，赞成",
+    "partOfSpeech": "v.",
+    "phrases": ["agree with sb.", "agree to a plan"],
+    "example": "",
+    "examPoint": "常考 agree with sb. 表示同意某人。",
+    "mistake": "agree 后接人常用 with，不直接说 agree somebody。",
+    "tags": ["高频词", "短语"]
+  },
+  {
+    "word": "explain",
+    "phonetic": "",
+    "meaning": "解释，说明",
+    "partOfSpeech": "v.",
+    "phrases": ["explain sth. to sb."],
+    "example": "",
+    "examPoint": "常考 explain sth. to sb. 的介词 to。",
+    "mistake": "不要写 explain sb. sth.。",
+    "tags": ["高频词", "易错搭配"]
+  }
+]
