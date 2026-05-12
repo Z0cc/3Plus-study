@@ -1,0 +1,34 @@
+[
+  {
+    "phrase": "be able to",
+    "meaning": "能够做某事",
+    "usage": "后接动词原形。",
+    "example": "",
+    "examPoint": "常与 can 进行同义转换。",
+    "tags": ["能力", "完成句子"]
+  },
+  {
+    "phrase": "agree with",
+    "meaning": "同意某人的意见",
+    "usage": "后面常接人或观点。",
+    "example": "",
+    "examPoint": "注意介词 with。",
+    "tags": ["动词短语", "高频"]
+  },
+  {
+    "phrase": "because of",
+    "meaning": "因为，由于",
+    "usage": "后接名词、代词或动名词短语。",
+    "example": "",
+    "examPoint": "because 后接句子，because of 后接短语。",
+    "tags": ["连词辨析", "完成句子"]
+  },
+  {
+    "phrase": "be important to sb.",
+    "meaning": "对某人很重要",
+    "usage": "important 前常搭配 be 动词。",
+    "example": "",
+    "examPoint": "常考 important 与 importance 的词性转换。",
+    "tags": ["形容词短语", "高频"]
+  }
+]
