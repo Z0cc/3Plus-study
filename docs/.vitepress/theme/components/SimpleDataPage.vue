@@ -12,16 +12,22 @@ const props = defineProps({
 
 const query = ref('')
 const revealed = ref({})
-const data = computed(() => props.type === 'patterns' ? patternsRaw : completionRaw)
-const items = computed(() => data.value.map((item, index) => ({
-  id: `${props.type}-${index}-${Array.isArray(item) ? item[0] : item.title}`,
-  term: Array.isArray(item) ? item[0] : item.title,
-  translation: Array.isArray(item) ? item[1] : item.content
-})))
+const isPatterns = computed(() => props.type === 'patterns')
+const data = computed(() => isPatterns.value ? patternsRaw : completionRaw)
+const items = computed(() => data.value.map((item, index) => {
+  const term = Array.isArray(item) ? item[0] : item.term || item.title
+  const translation = Array.isArray(item) ? item[1] : item.meaning || item.content
+  return {
+    id: `${props.type}-${index}-${term || translation}`,
+    term,
+    translation,
+    examples: Array.isArray(item) ? [] : item.examples || []
+  }
+}))
 const filteredItems = computed(() => {
   const key = query.value.trim().toLowerCase()
   if (!key) return items.value
-  return items.value.filter(item => `${item.term} ${item.translation}`.toLowerCase().includes(key))
+  return items.value.filter(item => `${item.term} ${item.translation} ${item.examples.join(' ')}`.toLowerCase().includes(key))
 })
 
 function isShown(id) {
@@ -43,13 +49,28 @@ function hideAll() {
 
 <template>
   <BackButton />
-  <div class="tool-row sticky-tools">
+
+  <div v-if="isPatterns" class="tool-row sticky-tools">
+    <input v-model="query" class="study-search" placeholder="搜索句型、中文或例句" />
+  </div>
+
+  <div v-else class="tool-row sticky-tools">
     <input v-model="query" class="study-search" placeholder="搜索内容或中文" />
     <button type="button" @click="showAll">全部显示</button>
     <button type="button" @click="hideAll">全部隐藏</button>
   </div>
 
-  <div class="pair-list">
+  <div v-if="isPatterns" class="pattern-list">
+    <article v-for="item in filteredItems" :key="item.id" class="pattern-card">
+      <h3>{{ item.term || item.translation }}</h3>
+      <p v-if="item.term && item.translation" class="pattern-meaning">{{ item.translation }}</p>
+      <ol class="example-list">
+        <li v-for="example in item.examples" :key="example">{{ example }}</li>
+      </ol>
+    </article>
+  </div>
+
+  <div v-else class="pair-list">
     <article v-for="item in filteredItems" :key="item.id" class="pair-row">
       <strong>{{ item.term }}</strong>
       <button type="button" class="soft-button" @click="toggle(item.id)">
