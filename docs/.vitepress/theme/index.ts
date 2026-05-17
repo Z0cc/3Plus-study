@@ -2,6 +2,7 @@ import DefaultTheme from 'vitepress/theme'
 import { h } from 'vue'
 import './style.css'
 import './chinese.css'
+import './math.css'
 import HomeLanding from './components/HomeLanding.vue'
 import SubjectSelect from './components/SubjectSelect.vue'
 import EnglishHome from './components/EnglishHome.vue'
@@ -13,6 +14,10 @@ import ThemeToneToggle from './components/ThemeToneToggle.vue'
 import BackButton from './components/BackButton.vue'
 import ChineseHome from './components/ChineseHome.vue'
 import PoemDetail from './components/PoemDetail.vue'
+import FormulaReviewPage from './components/FormulaReviewPage.vue'
+import FormulaCard from './components/FormulaCard.vue'
+import PracticeCard from './components/PracticeCard.vue'
+import ProgressBar from './components/ProgressBar.vue'
 
 export default {
   extends: DefaultTheme,
@@ -33,5 +38,9 @@ export default {
     app.component('BackButton', BackButton)
     app.component('ChineseHome', ChineseHome)
     app.component('PoemDetail', PoemDetail)
+    app.component('FormulaReviewPage', FormulaReviewPage)
+    app.component('FormulaCard', FormulaCard)
+    app.component('PracticeCard', PracticeCard)
+    app.component('ProgressBar', ProgressBar)
   }
 }
