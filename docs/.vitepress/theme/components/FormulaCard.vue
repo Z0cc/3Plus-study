@@ -59,6 +59,13 @@ function xTerm(coef) {
   return `${coef}x`
 }
 
+function formulaHtml(text) {
+  return text
+    .replace(/√\(a²\)/g, '<span class="root inline"><span class="root-radicand">(a²)</span></span>')
+    .replace(/√a/g, '<span class="root inline"><span class="root-radicand">a</span></span>')
+    .replace(/√25/g, '<span class="root inline"><span class="root-radicand">25</span></span>')
+}
+
 watch(
   () => props.topic.id,
   () => {
@@ -97,7 +104,14 @@ watch(
         <template v-else-if="topic.interactive.type === 'power'">
           <p class="math-line">{{ values.base }}² = {{ values.base }} × {{ values.base }} = {{ square }}</p>
           <p class="math-line">{{ values.base }}³ = {{ values.base }} × {{ values.base }} × {{ values.base }} = {{ cube }}</p>
-          <p class="math-line">√({{ values.base }}²) = |{{ values.base }}| = {{ Math.abs(values.base) }}</p>
+          <p class="math-line">
+            <span class="root"><span class="root-radicand">{{ square }}</span></span>
+            = {{ Math.abs(values.base) }}
+          </p>
+          <p class="math-line small">
+            <span class="root"><span class="root-radicand">({{ values.base }}²)</span></span>
+            = |{{ values.base }}| = {{ Math.abs(values.base) }}
+          </p>
         </template>
         <template v-else-if="topic.interactive.type === 'polynomial'">
           <p class="math-line">{{ values.p }}x + {{ values.q }}x = ({{ values.p }} + {{ values.q }})x = {{ polynomialSum }}x</p>
@@ -171,11 +185,11 @@ watch(
     <section class="formula-notes">
       <div>
         <h3>公式含义</h3>
-        <ul><li v-for="formula in topic.formulas" :key="formula.text"><strong>{{ formula.text }}</strong>：{{ formula.meaning }}</li></ul>
+        <ul><li v-for="formula in topic.formulas" :key="formula.text"><strong v-html="formulaHtml(formula.text)"></strong>：{{ formula.meaning }}</li></ul>
       </div>
       <div class="mistake-box clean">
         <h3>易错点</h3>
-        <p v-for="mistake in topic.mistakes" :key="mistake">{{ mistake }}</p>
+        <p v-for="mistake in topic.mistakes" :key="mistake" v-html="formulaHtml(mistake)"></p>
       </div>
     </section>
 
