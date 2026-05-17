@@ -1,0 +1,533 @@
+.math-review-page {
+  max-width: 1360px;
+  margin: 0 auto 72px;
+}
+
+.math-hero {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 430px);
+  gap: 22px;
+  align-items: end;
+  margin: 10px 0 20px;
+  padding: clamp(22px, 4vw, 34px);
+  border-radius: 24px;
+}
+
+.math-hero h1 {
+  margin: 0;
+  font-size: clamp(2rem, 5vw, 3.6rem);
+  line-height: 1.08;
+  letter-spacing: 0;
+}
+
+.math-hero p {
+  margin: 12px 0 0;
+  color: var(--study-muted);
+}
+
+.math-hero-side {
+  display: grid;
+  gap: 14px;
+}
+
+.math-search,
+.practice-input {
+  width: 100%;
+  min-height: 44px;
+  border: 1px solid var(--study-border);
+  border-radius: 12px;
+  padding: 0 14px;
+  background: var(--study-card-solid);
+  color: var(--study-ink);
+  outline: none;
+}
+
+.math-search:focus,
+.practice-input:focus {
+  border-color: #10b981;
+  box-shadow: 0 0 0 4px color-mix(in srgb, #10b981 14%, transparent);
+}
+
+.math-layout {
+  display: grid;
+  grid-template-columns: 220px minmax(0, 1fr) 330px;
+  gap: 18px;
+  align-items: start;
+}
+
+.math-nav,
+.practice-panel,
+.formula-card {
+  border: 1px solid var(--study-border);
+  border-radius: 20px;
+  background: var(--study-card);
+  box-shadow: var(--study-shadow);
+}
+
+.math-nav,
+.practice-panel {
+  position: sticky;
+  top: 12px;
+  display: grid;
+  gap: 10px;
+  padding: 14px;
+}
+
+.math-nav strong,
+.practice-head h3 {
+  margin: 0;
+}
+
+.math-nav button {
+  display: flex;
+  justify-content: space-between;
+  gap: 12px;
+  border: 1px solid transparent;
+  border-radius: 12px;
+  padding: 11px 12px;
+  color: var(--study-ink);
+  background: transparent;
+  text-align: left;
+  cursor: pointer;
+}
+
+.math-nav button.active,
+.math-nav button:hover {
+  border-color: color-mix(in srgb, #10b981 28%, var(--study-border));
+  background: color-mix(in srgb, var(--study-soft-green) 72%, var(--study-card-solid) 28%);
+}
+
+.math-nav em {
+  color: var(--study-muted);
+  font-style: normal;
+  white-space: nowrap;
+}
+
+.math-main {
+  min-width: 0;
+}
+
+.math-topic-tools {
+  position: sticky;
+  top: 0;
+  z-index: 8;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 12px;
+  align-items: center;
+  margin-bottom: 12px;
+  padding: 10px 0;
+  background: linear-gradient(180deg, var(--vp-c-bg) 78%, transparent);
+}
+
+.math-progress {
+  display: grid;
+  gap: 7px;
+}
+
+.math-progress-head {
+  display: flex;
+  justify-content: space-between;
+  color: var(--study-muted);
+  font-size: 0.92rem;
+}
+
+.math-progress-head strong {
+  color: var(--study-ink);
+}
+
+.math-progress-track {
+  height: 9px;
+  overflow: hidden;
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--study-border) 46%, transparent);
+}
+
+.math-progress-track span {
+  display: block;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, #10b981, #2563eb);
+}
+
+.formula-card {
+  padding: clamp(18px, 3vw, 26px);
+}
+
+.formula-card-head h2 {
+  margin: 0;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  letter-spacing: 0;
+}
+
+.formula-card-head p {
+  margin: 12px 0 0;
+  color: var(--study-ink);
+  font-size: 1.05rem;
+}
+
+.formula-list {
+  display: grid;
+  gap: 10px;
+  margin-top: 20px;
+}
+
+.formula-pill {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  border: 1px solid color-mix(in srgb, #10b981 18%, var(--study-border));
+  border-radius: 14px;
+  padding: 13px 15px;
+  background: color-mix(in srgb, var(--study-card-solid) 78%, #ecfdf5 22%);
+  color: var(--study-ink);
+  cursor: pointer;
+  text-align: left;
+}
+
+.formula-pill strong {
+  font-size: 1.08rem;
+}
+
+.formula-pill span {
+  color: var(--study-muted);
+  white-space: nowrap;
+}
+
+.formula-detail {
+  border-left: 4px solid #10b981;
+  border-radius: 12px;
+  padding: 10px 14px;
+  background: var(--study-soft-green);
+}
+
+.formula-detail p {
+  margin: 4px 0;
+}
+
+.formula-grid-blocks {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-top: 18px;
+}
+
+.example-box,
+.mistake-box,
+.exam-tip,
+.interactive-box,
+.square-memory {
+  border: 1px solid var(--study-border);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.example-box {
+  background: color-mix(in srgb, var(--study-soft-blue) 72%, var(--study-card-solid) 28%);
+}
+
+.mistake-box {
+  background: color-mix(in srgb, #fee2e2 42%, var(--study-card-solid) 58%);
+}
+
+.dark .mistake-box {
+  background: color-mix(in srgb, #7f1d1d 22%, var(--study-card-solid) 78%);
+}
+
+.example-box h3,
+.mistake-box h3,
+.interactive-box h3,
+.square-memory h3 {
+  margin: 0 0 10px;
+  font-size: 1.05rem;
+}
+
+.example-box ul {
+  margin: 0;
+  padding-left: 1.2rem;
+}
+
+.mistake-box p {
+  margin: 6px 0;
+}
+
+.exam-tip {
+  margin-top: 14px;
+  background: var(--study-warm);
+  font-weight: 700;
+}
+
+.square-memory {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-top: 14px;
+  background: var(--study-card-solid);
+}
+
+.square-memory h3 {
+  flex-basis: 100%;
+}
+
+.square-memory span,
+.practice-type,
+.mistake-tag {
+  border-radius: 999px;
+  padding: 4px 10px;
+  background: var(--study-soft-blue);
+  color: var(--study-ink);
+  font-size: 0.9rem;
+}
+
+.interactive-box {
+  margin-top: 14px;
+  background: var(--study-card-solid);
+}
+
+.number-line {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  margin: 18px 8px;
+  padding-top: 28px;
+  border-top: 3px solid var(--study-border);
+}
+
+.number-line span {
+  position: relative;
+  font-weight: 800;
+}
+
+.number-line span::before {
+  content: '';
+  position: absolute;
+  top: -34px;
+  left: 50%;
+  width: 2px;
+  height: 15px;
+  background: var(--study-muted);
+}
+
+.number-line i {
+  position: absolute;
+  top: -3px;
+  left: 0;
+  width: 50%;
+  height: 3px;
+  background: #10b981;
+  box-shadow: 0 0 0 6px color-mix(in srgb, #10b981 14%, transparent);
+}
+
+.match-game {
+  display: grid;
+  gap: 12px;
+}
+
+.match-game div,
+.identify-demo div,
+.term-bank,
+.term-zones {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.match-game button,
+.identify-demo button,
+.term-zone button {
+  border: 1px solid var(--study-border);
+  border-radius: 10px;
+  padding: 9px 12px;
+  background: var(--vp-c-bg-soft);
+  color: var(--study-ink);
+  cursor: pointer;
+}
+
+.match-game button.selected,
+.identify-demo button.selected {
+  border-color: #2563eb;
+  background: color-mix(in srgb, #2563eb 14%, var(--vp-c-bg-soft));
+}
+
+.match-game button.done {
+  border-color: #10b981;
+  background: color-mix(in srgb, #10b981 18%, var(--vp-c-bg-soft));
+}
+
+.term-bank span {
+  border: 1px solid var(--study-border);
+  border-radius: 10px;
+  padding: 8px 12px;
+  background: var(--study-soft-blue);
+  font-weight: 800;
+}
+
+.term-zones {
+  margin-top: 12px;
+}
+
+.term-zone {
+  flex: 1 1 150px;
+  border: 1px dashed var(--study-border);
+  border-radius: 14px;
+  padding: 12px;
+}
+
+.term-zone strong,
+.term-zone p {
+  display: block;
+  margin: 0 0 8px;
+}
+
+.step-demo ol {
+  margin: 10px 0;
+  padding-left: 1.2rem;
+}
+
+.step-demo li {
+  opacity: 0.36;
+  margin: 6px 0;
+}
+
+.step-demo li.on {
+  opacity: 1;
+  color: var(--study-ink);
+  font-weight: 700;
+}
+
+.reduce-demo mark {
+  border-radius: 6px;
+  padding: 0 6px;
+  background: color-mix(in srgb, #10b981 22%, transparent);
+  color: var(--study-ink);
+}
+
+.practice-panel {
+  align-self: start;
+}
+
+.practice-card {
+  display: grid;
+  gap: 10px;
+  border: 1px solid var(--study-border);
+  border-radius: 16px;
+  padding: 14px;
+  background: var(--study-card-solid);
+}
+
+.practice-question {
+  margin: 0;
+  font-weight: 800;
+}
+
+.math-button {
+  border: 1px solid var(--study-border);
+  border-radius: 10px;
+  min-height: 40px;
+  padding: 0 14px;
+  color: var(--study-ink);
+  background: var(--study-card-solid);
+  font-weight: 800;
+  cursor: pointer;
+}
+
+.math-button.primary {
+  border-color: #10b981;
+  color: #fff;
+  background: linear-gradient(135deg, #10b981, #2563eb);
+}
+
+.practice-result {
+  border-radius: 12px;
+  padding: 10px 12px;
+}
+
+.practice-result.right {
+  background: color-mix(in srgb, #dcfce7 68%, var(--study-card-solid) 32%);
+}
+
+.practice-result.wrong {
+  background: color-mix(in srgb, #fee2e2 58%, var(--study-card-solid) 42%);
+}
+
+.dark .practice-result.right {
+  background: color-mix(in srgb, #14532d 30%, var(--study-card-solid) 70%);
+}
+
+.dark .practice-result.wrong {
+  background: color-mix(in srgb, #7f1d1d 26%, var(--study-card-solid) 74%);
+}
+
+.practice-result p,
+.answer-line {
+  margin: 6px 0 0;
+  color: var(--study-muted);
+}
+
+.mistake-tag {
+  margin-left: 8px;
+  background: color-mix(in srgb, #ef4444 18%, var(--study-card-solid));
+}
+
+@media (max-width: 1160px) {
+  .math-layout {
+    grid-template-columns: 200px minmax(0, 1fr);
+  }
+
+  .practice-panel {
+    position: static;
+    grid-column: 2;
+  }
+}
+
+@media (max-width: 820px) {
+  .math-hero,
+  .math-layout,
+  .formula-grid-blocks,
+  .math-topic-tools {
+    grid-template-columns: 1fr;
+  }
+
+  .math-nav,
+  .practice-panel,
+  .math-topic-tools {
+    position: static;
+  }
+
+  .math-nav {
+    display: flex;
+    overflow-x: auto;
+    padding-bottom: 10px;
+  }
+
+  .math-nav strong {
+    display: none;
+  }
+
+  .math-nav button {
+    min-width: 150px;
+  }
+
+  .practice-panel {
+    grid-column: auto;
+  }
+}
+
+@media (max-width: 520px) {
+  .math-review-page {
+    margin-bottom: 46px;
+  }
+
+  .math-hero,
+  .formula-card,
+  .practice-panel,
+  .math-nav {
+    border-radius: 16px;
+  }
+
+  .formula-pill {
+    align-items: flex-start;
+    flex-direction: column;
+  }
+}
