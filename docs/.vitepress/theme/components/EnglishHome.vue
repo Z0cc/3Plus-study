@@ -40,14 +40,16 @@ const results = computed(() => {
 
 <template>
   <BackButton />
-  <section class="module-head">
+  <section class="module-head glass-panel english-hero-panel">
     <div>
+      <p class="eyebrow">English Library</p>
       <h2>英语学习库</h2>
+      <p>语法、动词变化、完成句子和高频句型集中复习。</p>
     </div>
     <input v-model="query" class="study-search" placeholder="搜索不规则动词、完成句子、高频句型" />
   </section>
 
-  <div v-if="results.length" class="result-panel">
+  <div v-if="results.length" class="result-panel animated-list-panel">
     <a v-for="item in results" :key="item.type + item.term" :href="withBase(item.link)" class="result-row">
       <span>{{ item.type }}</span>
       <strong>{{ item.term }}</strong>
@@ -56,7 +58,7 @@ const results = computed(() => {
   </div>
 
   <div class="category-grid compact-grid">
-    <a v-for="item in categories" :key="item.title" class="study-card" :href="withBase(item.link)">
+    <a v-for="item in categories" :key="item.title" class="study-card spotlight-card" :href="withBase(item.link)">
       <span class="card-kicker">{{ item.count }}{{ item.suffix }}</span>
       <strong>{{ item.title }}</strong>
       <span class="card-note">{{ item.text }}</span>
