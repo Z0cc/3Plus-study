@@ -1,5 +1,5 @@
 <script setup>
-import { computed, reactive, ref, watch } from 'vue'
+import { computed, reactive, watch } from 'vue'
 
 const props = defineProps({
   topic: {
@@ -8,187 +8,182 @@ const props = defineProps({
   }
 })
 
-const opened = reactive({})
-const squareSelected = reactive({ left: '', right: '' })
-const squareMatches = reactive({})
-const activeStep = ref(0)
-const selectedMode = ref('')
-const placedTerms = reactive({ x: [], x2: [], const: [] })
-
-const squareValues = ['25', '36', '49', '64', '81', '100']
-const squareFormulas = ['5²', '6²', '7²', '8²', '9²', '10²']
-const squareAnswer = { '25': '5²', '36': '6²', '49': '7²', '64': '8²', '81': '9²', '100': '10²' }
-const terms = [
-  { text: 'x²', group: 'x2' },
-  { text: '3x', group: 'x' },
-  { text: '5x²', group: 'x2' },
-  { text: '2x', group: 'x' },
-  { text: '7', group: 'const' },
-  { text: '4', group: 'const' }
-]
-const factorQuestions = [
-  { text: 'x²+10x+25', mode: '完全平方', reason: '25=5²，中间项 10x=2×x×5。' },
-  { text: 'x²-16', mode: '平方差', reason: '两个平方相减：x²-4²。' },
-  { text: '6x+12', mode: '提公因式', reason: '两项都有公因式 6。' }
-]
-const factorIndex = ref(0)
-
-const currentFactor = computed(() => factorQuestions[factorIndex.value])
-const factorResult = computed(() => {
-  if (!selectedMode.value) return ''
-  return selectedMode.value === currentFactor.value.mode ? `正确：${currentFactor.value.reason}` : `再想想：${currentFactor.value.reason}`
+const values = reactive({
+  n: -3,
+  base: -3,
+  p: 3,
+  q: 5,
+  m: 2,
+  c: 3,
+  a: 2,
+  b: 3,
+  common: 3,
+  f: 2,
+  den: 4,
+  eqA: 2,
+  eqB: 3,
+  eqC: 11
 })
 
-function toggleFormula(index) {
-  opened[index] = !opened[index]
+const absLeft = computed(() => `${Math.min(values.n, 0) * 5 + 50}%`)
+const absWidth = computed(() => `${Math.abs(values.n) * 5}%`)
+const square = computed(() => values.base * values.base)
+const cube = computed(() => values.base * values.base * values.base)
+const polynomialSum = computed(() => values.p + values.q)
+const distributeN = computed(() => values.m * values.c)
+const midTerm = computed(() => 2 * values.a * values.b)
+const firstSquare = computed(() => values.a * values.a)
+const lastSquare = computed(() => values.b * values.b)
+const factorSquare = computed(() => values.b * values.b)
+const fractionReduced = computed(() => reduce(values.f, values.den))
+const equationRight = computed(() => values.eqC - values.eqB)
+const equationX = computed(() => formatNumber(equationRight.value / values.eqA))
+
+function reduce(a, b) {
+  const g = gcd(Math.abs(a), Math.abs(b)) || 1
+  return `${a / g}/${b / g}`
 }
 
-function chooseSquare(side, value) {
-  squareSelected[side] = value
-  if (!squareSelected.left || !squareSelected.right) return
-  if (squareAnswer[squareSelected.left] === squareSelected.right) {
-    squareMatches[squareSelected.left] = squareSelected.right
-  }
-  squareSelected.left = ''
-  squareSelected.right = ''
+function gcd(a, b) {
+  while (b) [a, b] = [b, a % b]
+  return a
 }
 
-function putTerm(term, group) {
-  if (placedTerms.x.includes(term.text) || placedTerms.x2.includes(term.text) || placedTerms.const.includes(term.text)) return
-  placedTerms[group].push(term.text)
+function formatNumber(num) {
+  return Number.isInteger(num) ? String(num) : num.toFixed(2).replace(/0+$/, '').replace(/\.$/, '')
 }
 
-function nextStep() {
-  activeStep.value = Math.min(activeStep.value + 1, 3)
-}
-
-function nextFactor() {
-  factorIndex.value = (factorIndex.value + 1) % factorQuestions.length
-  selectedMode.value = ''
+function xTerm(coef) {
+  if (coef === 1) return 'x'
+  if (coef === -1) return '-x'
+  return `${coef}x`
 }
 
 watch(
   () => props.topic.id,
   () => {
-    Object.keys(opened).forEach((key) => delete opened[key])
-    Object.keys(squareMatches).forEach((key) => delete squareMatches[key])
-    placedTerms.x = []
-    placedTerms.x2 = []
-    placedTerms.const = []
-    activeStep.value = 0
-    selectedMode.value = ''
-    factorIndex.value = 0
+    values.n = -3
+    values.base = -3
+    values.p = 3
+    values.q = 5
+    values.m = 2
+    values.c = 3
+    values.a = 2
+    values.b = 3
+    values.common = 3
+    values.f = 2
+    values.den = 4
+    values.eqA = 2
+    values.eqB = 3
+    values.eqC = 11
   }
 )
 </script>
 
 <template>
-  <section class="formula-card">
-    <div class="formula-card-head">
+  <section class="formula-card formula-paper">
+    <header class="formula-card-head">
       <span class="eyebrow">基础公式</span>
       <h2>{{ topic.title }}</h2>
       <p>{{ topic.plain }}</p>
-    </div>
+    </header>
 
-    <div class="formula-list">
-      <button v-for="(formula, index) in topic.formulas" :key="formula.text" type="button" class="formula-pill" @click="toggleFormula(index)">
-        <strong>{{ formula.text }}</strong>
-        <span>{{ opened[index] ? '收起' : '展开含义' }}</span>
-      </button>
-      <div v-for="(formula, index) in topic.formulas" :key="`${formula.text}-detail`" v-show="opened[index]" class="formula-detail">
-        <p><strong>公式含义：</strong>{{ formula.meaning }}</p>
-        <p><strong>使用条件：</strong>{{ formula.condition }}</p>
+    <div class="formula-showcase">
+      <div class="math-display">
+        <template v-if="topic.interactive.type === 'absolute'">
+          <p class="math-line">|{{ values.n }}| = {{ Math.abs(values.n) }}</p>
+          <p>因为 {{ values.n }} 到 0 的距离是 {{ Math.abs(values.n) }}。</p>
+        </template>
+        <template v-else-if="topic.interactive.type === 'power'">
+          <p class="math-line">{{ values.base }}² = {{ values.base }} × {{ values.base }} = {{ square }}</p>
+          <p class="math-line">{{ values.base }}³ = {{ values.base }} × {{ values.base }} × {{ values.base }} = {{ cube }}</p>
+          <p class="math-line">√({{ values.base }}²) = |{{ values.base }}| = {{ Math.abs(values.base) }}</p>
+        </template>
+        <template v-else-if="topic.interactive.type === 'polynomial'">
+          <p class="math-line">{{ values.p }}x + {{ values.q }}x = ({{ values.p }} + {{ values.q }})x = {{ polynomialSum }}x</p>
+          <p class="math-line">{{ values.m }}(x + {{ values.c }}) = {{ values.m }}x + {{ distributeN }}</p>
+        </template>
+        <template v-else-if="topic.interactive.type === 'multiply'">
+          <p class="math-line">({{ xTerm(values.a) }} + {{ values.b }})²</p>
+          <p>利用完全平方公式：</p>
+          <p class="math-line small">(a + b)² = a² + 2ab + b²</p>
+          <p>所以：</p>
+          <p class="math-line small">= ({{ xTerm(values.a) }})² + 2 × {{ xTerm(values.a) }} × {{ values.b }} + {{ values.b }}²</p>
+          <p class="math-line">= {{ firstSquare }}x² + {{ midTerm }}x + {{ lastSquare }}</p>
+        </template>
+        <template v-else-if="topic.interactive.type === 'factor'">
+          <p class="math-line">x² - {{ factorSquare }} = (x + {{ values.b }})(x - {{ values.b }})</p>
+          <p>这是平方差：</p>
+          <p class="math-line small">a² - b² = (a + b)(a - b)</p>
+          <p>其中 a = x，b = {{ values.b }}。</p>
+        </template>
+        <template v-else-if="topic.interactive.type === 'fraction'">
+          <p class="fraction-line"><span>{{ values.f }}x</span><i></i><span>{{ values.den }}x</span></p>
+          <p>上下同时约去 x，条件是 x≠0。</p>
+          <p class="math-line">{{ values.f }}x / {{ values.den }}x = {{ fractionReduced }}</p>
+        </template>
+        <template v-else-if="topic.interactive.type === 'equation'">
+          <p class="math-line">{{ values.eqA }}x + {{ values.eqB }} = {{ values.eqC }}</p>
+          <p class="math-line small">{{ values.eqA }}x = {{ values.eqC }} - {{ values.eqB }}</p>
+          <p class="math-line small">{{ values.eqA }}x = {{ equationRight }}</p>
+          <p class="math-line">x = {{ equationX }}</p>
+        </template>
+      </div>
+
+      <div class="formula-controls">
+        <label v-if="topic.interactive.type === 'absolute'">a = {{ values.n }}<input v-model.number="values.n" type="range" min="-10" max="10" /></label>
+        <label v-if="topic.interactive.type === 'power'">a = {{ values.base }}<input v-model.number="values.base" type="range" min="-10" max="10" /></label>
+        <template v-if="topic.interactive.type === 'polynomial'">
+          <label>a = {{ values.p }}<input v-model.number="values.p" type="range" min="-9" max="9" /></label>
+          <label>b = {{ values.q }}<input v-model.number="values.q" type="range" min="-9" max="9" /></label>
+          <label>括号外系数 = {{ values.m }}<input v-model.number="values.m" type="range" min="-6" max="6" /></label>
+          <label>常数 = {{ values.c }}<input v-model.number="values.c" type="range" min="-9" max="9" /></label>
+        </template>
+        <template v-if="topic.interactive.type === 'multiply'">
+          <label>a = {{ values.a }}x<input v-model.number="values.a" type="range" min="1" max="8" /></label>
+          <label>b = {{ values.b }}<input v-model.number="values.b" type="range" min="1" max="10" /></label>
+        </template>
+        <label v-if="topic.interactive.type === 'factor'">b = {{ values.b }}<input v-model.number="values.b" type="range" min="1" max="12" /></label>
+        <template v-if="topic.interactive.type === 'fraction'">
+          <label>分子系数 = {{ values.f }}<input v-model.number="values.f" type="range" min="1" max="12" /></label>
+          <label>分母系数 = {{ values.den }}<input v-model.number="values.den" type="range" min="1" max="12" /></label>
+        </template>
+        <template v-if="topic.interactive.type === 'equation'">
+          <label>a = {{ values.eqA }}<input v-model.number="values.eqA" type="range" min="1" max="9" /></label>
+          <label>b = {{ values.eqB }}<input v-model.number="values.eqB" type="range" min="-10" max="10" /></label>
+          <label>右边 = {{ values.eqC }}<input v-model.number="values.eqC" type="range" min="-20" max="30" /></label>
+        </template>
+      </div>
+
+      <div v-if="topic.interactive.type === 'absolute'" class="visual-card number-visual">
+        <div class="number-axis"><i :style="{ left: absLeft, width: absWidth }"></i><span>-10</span><span>0</span><span>10</span></div>
+      </div>
+      <div v-else-if="topic.interactive.type === 'multiply'" class="visual-card area-visual">
+        <div class="square-diagram">
+          <span class="area-a">a²</span><span class="area-ab">ab</span><span class="area-ab second">ab</span><span class="area-b">b²</span>
+        </div>
+      </div>
+      <div v-else-if="topic.interactive.type === 'factor'" class="visual-card split-visual">
+        <div class="rect left">a²</div><div class="rect cut">b²</div><div class="rect right">(a+b)(a-b)</div>
       </div>
     </div>
 
-    <div class="formula-grid-blocks">
-      <div class="example-box">
-        <h3>例题拆解</h3>
-        <ul>
-          <li v-for="example in topic.examples" :key="example">{{ example }}</li>
-        </ul>
+    <section class="formula-notes">
+      <div>
+        <h3>公式含义</h3>
+        <ul><li v-for="formula in topic.formulas" :key="formula.text"><strong>{{ formula.text }}</strong>：{{ formula.meaning }}</li></ul>
       </div>
-      <div class="mistake-box">
+      <div class="mistake-box clean">
         <h3>易错点</h3>
         <p v-for="mistake in topic.mistakes" :key="mistake">{{ mistake }}</p>
       </div>
-    </div>
+    </section>
 
-    <div class="exam-tip">考试提醒：{{ topic.examTip }}</div>
-
-    <div v-if="topic.squares" class="square-memory">
+    <section v-if="topic.squares" class="square-memory clean">
       <h3>必背平方数</h3>
       <span v-for="item in topic.squares" :key="item">{{ item }}</span>
-    </div>
+    </section>
 
-    <div class="interactive-box">
-      <h3>交互理解</h3>
-
-      <div v-if="topic.interactive.type === 'numberLine'" class="number-line-demo">
-        <div class="number-line">
-          <span>-3</span><span>0</span><span>3</span>
-          <i></i>
-        </div>
-        <p>{{ topic.interactive.result }}</p>
-      </div>
-
-      <div v-else-if="topic.interactive.type === 'squareMatch'" class="match-game">
-        <div>
-          <button v-for="value in squareValues" :key="value" type="button" :class="{ selected: squareSelected.left === value, done: squareMatches[value] }" @click="chooseSquare('left', value)">{{ value }}</button>
-        </div>
-        <div>
-          <button v-for="formula in squareFormulas" :key="formula" type="button" :class="{ selected: squareSelected.right === formula }" @click="chooseSquare('right', formula)">{{ formula }}</button>
-        </div>
-        <p>已匹配 {{ Object.keys(squareMatches).length }} / 6</p>
-      </div>
-
-      <div v-else-if="topic.interactive.type === 'classifyTerms'" class="term-classify">
-        <div class="term-bank">
-          <span v-for="term in terms" :key="term.text">{{ term.text }}</span>
-        </div>
-        <div class="term-zones">
-          <div v-for="zone in [{ id: 'x', label: 'x类' }, { id: 'x2', label: 'x²类' }, { id: 'const', label: '常数类' }]" :key="zone.id" class="term-zone">
-            <strong>{{ zone.label }}</strong>
-            <button v-for="term in terms.filter((item) => item.group === zone.id)" :key="term.text" type="button" @click="putTerm(term, zone.id)">放入 {{ term.text }}</button>
-            <p>{{ placedTerms[zone.id].join('、') || '等待分类' }}</p>
-          </div>
-        </div>
-      </div>
-
-      <div v-else-if="topic.interactive.type === 'expandSteps'" class="step-demo">
-        <strong>(2x+3)²</strong>
-        <ol>
-          <li :class="{ on: activeStep >= 1 }">第一项平方：(2x)²=4x²</li>
-          <li :class="{ on: activeStep >= 2 }">中间项：2×2x×3=12x</li>
-          <li :class="{ on: activeStep >= 3 }">最后一项平方：3²=9，结果 4x²+12x+9</li>
-        </ol>
-        <button type="button" class="math-button primary" @click="nextStep">下一步</button>
-      </div>
-
-      <div v-else-if="topic.interactive.type === 'identifyFactor'" class="identify-demo">
-        <strong>{{ currentFactor.text }}</strong>
-        <div>
-          <button v-for="mode in ['提公因式', '平方差', '完全平方']" :key="mode" type="button" :class="{ selected: selectedMode === mode }" @click="selectedMode = mode">{{ mode }}</button>
-        </div>
-        <p v-if="factorResult">{{ factorResult }}</p>
-        <button type="button" class="math-button ghost" @click="nextFactor">换一题</button>
-      </div>
-
-      <div v-else-if="topic.interactive.type === 'reduceFraction'" class="reduce-demo">
-        <p><strong>2x / 4x</strong></p>
-        <p>共同因子：<mark>x</mark>，上下同时约去 x</p>
-        <p>2x/4x = 2/4 = 1/2，条件是 x≠0</p>
-      </div>
-
-      <div v-else-if="topic.interactive.type === 'equationSteps'" class="step-demo">
-        <strong>2x+3=11</strong>
-        <ol>
-          <li :class="{ on: activeStep >= 1 }">+3 从左边移动到右边，变成 -3</li>
-          <li :class="{ on: activeStep >= 2 }">2x=11-3，所以 2x=8</li>
-          <li :class="{ on: activeStep >= 3 }">两边除以 2，x=4</li>
-        </ol>
-        <button type="button" class="math-button primary" @click="nextStep">下一步</button>
-      </div>
-    </div>
+    <div class="exam-tip clean">考试提醒：{{ topic.examTip }}</div>
   </section>
 </template>
