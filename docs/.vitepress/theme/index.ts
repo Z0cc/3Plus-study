@@ -16,7 +16,6 @@ import ChineseHome from './components/ChineseHome.vue'
 import PoemDetail from './components/PoemDetail.vue'
 import FormulaReviewPage from './components/FormulaReviewPage.vue'
 import FormulaCard from './components/FormulaCard.vue'
-import PracticeCard from './components/PracticeCard.vue'
 import ProgressBar from './components/ProgressBar.vue'
 
 export default {
@@ -40,7 +39,6 @@ export default {
     app.component('PoemDetail', PoemDetail)
     app.component('FormulaReviewPage', FormulaReviewPage)
     app.component('FormulaCard', FormulaCard)
-    app.component('PracticeCard', PracticeCard)
     app.component('ProgressBar', ProgressBar)
   }
 }
