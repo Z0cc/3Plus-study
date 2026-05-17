@@ -1,6 +1,7 @@
 import DefaultTheme from 'vitepress/theme'
 import { h } from 'vue'
 import './style.css'
+import './chinese.css'
 import HomeLanding from './components/HomeLanding.vue'
 import SubjectSelect from './components/SubjectSelect.vue'
 import EnglishHome from './components/EnglishHome.vue'
@@ -10,6 +11,8 @@ import GrammarOriginal from './components/GrammarOriginal.vue'
 import SimpleDataPage from './components/SimpleDataPage.vue'
 import ThemeToneToggle from './components/ThemeToneToggle.vue'
 import BackButton from './components/BackButton.vue'
+import ChineseHome from './components/ChineseHome.vue'
+import PoemDetail from './components/PoemDetail.vue'
 
 export default {
   extends: DefaultTheme,
@@ -28,5 +31,7 @@ export default {
     app.component('SimpleDataPage', SimpleDataPage)
     app.component('ThemeToneToggle', ThemeToneToggle)
     app.component('BackButton', BackButton)
+    app.component('ChineseHome', ChineseHome)
+    app.component('PoemDetail', PoemDetail)
   }
 }
