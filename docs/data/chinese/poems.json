@@ -19,6 +19,35 @@
       { "text": "匪女之为美，", "pinyin": "fēi rǔ zhī wéi měi" },
       { "text": "美人之贻。", "pinyin": "měi rén zhī yí" }
     ],
+    "stanzas": [
+      {
+        "lines": [
+          { "chars": [{ "text": "静", "pinyin": "jìng" }, { "text": "女", "pinyin": "nǚ" }, { "text": "其", "pinyin": "qí" }, { "text": "姝", "pinyin": "shū" }, { "text": "，", "pinyin": "" }] },
+          { "chars": [{ "text": "俟", "pinyin": "sì" }, { "text": "我", "pinyin": "wǒ" }, { "text": "于", "pinyin": "yú" }, { "text": "城", "pinyin": "chéng" }, { "text": "隅", "pinyin": "yú" }, { "text": "。", "pinyin": "" }] },
+          { "chars": [{ "text": "爱", "pinyin": "ài" }, { "text": "而", "pinyin": "ér" }, { "text": "不", "pinyin": "bù" }, { "text": "见", "pinyin": "jiàn" }, { "text": "，", "pinyin": "" }] },
+          { "chars": [{ "text": "搔", "pinyin": "sāo" }, { "text": "首", "pinyin": "shǒu" }, { "text": "踟", "pinyin": "chí" }, { "text": "蹰", "pinyin": "chú" }, { "text": "。", "pinyin": "" }] }
+        ],
+        "translation": "娴静姑娘真漂亮，约我等在城角旁。视线遮蔽看不见，搔头徘徊心紧张。"
+      },
+      {
+        "lines": [
+          { "chars": [{ "text": "静", "pinyin": "jìng" }, { "text": "女", "pinyin": "nǚ" }, { "text": "其", "pinyin": "qí" }, { "text": "娈", "pinyin": "luán" }, { "text": "，", "pinyin": "" }] },
+          { "chars": [{ "text": "贻", "pinyin": "yí" }, { "text": "我", "pinyin": "wǒ" }, { "text": "彤", "pinyin": "tóng" }, { "text": "管", "pinyin": "guǎn" }, { "text": "。", "pinyin": "" }] },
+          { "chars": [{ "text": "彤", "pinyin": "tóng" }, { "text": "管", "pinyin": "guǎn" }, { "text": "有", "pinyin": "yǒu" }, { "text": "炜", "pinyin": "wěi" }, { "text": "，", "pinyin": "" }] },
+          { "chars": [{ "text": "说", "pinyin": "yuè" }, { "text": "怿", "pinyin": "yì" }, { "text": "女", "pinyin": "rǔ" }, { "text": "美", "pinyin": "měi" }, { "text": "。", "pinyin": "" }] }
+        ],
+        "translation": "娴静姑娘真娇艳，送我新笔红彤管。鲜红笔管有光彩，爱她姑娘好容颜。"
+      },
+      {
+        "lines": [
+          { "chars": [{ "text": "自", "pinyin": "zì" }, { "text": "牧", "pinyin": "mù" }, { "text": "归", "pinyin": "kuì" }, { "text": "荑", "pinyin": "tí" }, { "text": "，", "pinyin": "" }] },
+          { "chars": [{ "text": "洵", "pinyin": "xún" }, { "text": "美", "pinyin": "měi" }, { "text": "且", "pinyin": "qiě" }, { "text": "异", "pinyin": "yì" }, { "text": "。", "pinyin": "" }] },
+          { "chars": [{ "text": "匪", "pinyin": "fēi" }, { "text": "女", "pinyin": "rǔ" }, { "text": "之", "pinyin": "zhī" }, { "text": "为", "pinyin": "wéi" }, { "text": "美", "pinyin": "měi" }, { "text": "，", "pinyin": "" }] },
+          { "chars": [{ "text": "美", "pinyin": "měi" }, { "text": "人", "pinyin": "rén" }, { "text": "之", "pinyin": "zhī" }, { "text": "贻", "pinyin": "yí" }, { "text": "。", "pinyin": "" }] }
+        ],
+        "translation": "远自郊野赠柔荑，诚然美好又珍异。不是荑草长得美，美人相赠厚情意。"
+      }
+    ],
     "notes": [
       "静女：贞静娴雅之女。马瑞辰《毛诗传笺通释》：“静当读靖，谓善女，犹云淑女、硕女也。”",
       "姝：美丽、漂亮。",
