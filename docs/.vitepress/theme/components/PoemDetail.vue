@@ -13,6 +13,8 @@ const poem = computed(() => poems.find((item) => item.id === props.id) || poems[
 const showPinyin = ref(false)
 const showTranslation = ref(true)
 const showNotes = ref(true)
+
+const stanzas = computed(() => poem.value.stanzas || [])
 </script>
 
 <template>
@@ -30,7 +32,19 @@ const showNotes = ref(true)
         <p>{{ poem.dynasty }} · {{ poem.author }}</p>
       </header>
 
-      <div class="poem-lines">
+      <div v-if="stanzas.length" class="poem-stanzas">
+        <section v-for="(stanza, stanzaIndex) in stanzas" :key="stanzaIndex" class="poem-stanza">
+          <div v-for="(line, lineIndex) in stanza.lines" :key="`${stanzaIndex}-${lineIndex}`" class="poem-character-line">
+            <span v-for="(char, charIndex) in line.chars" :key="`${stanzaIndex}-${lineIndex}-${charIndex}`" class="poem-character" :class="{ mark: !char.pinyin }">
+              <span class="poem-char-pinyin">{{ showPinyin ? char.pinyin : '' }}</span>
+              <span class="poem-char-text">{{ char.text }}</span>
+            </span>
+          </div>
+          <div v-if="showTranslation" class="poem-inline-translation">{{ stanza.translation }}</div>
+        </section>
+      </div>
+
+      <div v-else class="poem-lines">
         <span v-for="line in poem.lines" :key="line.text" class="poem-line">
           <span class="poem-pinyin">{{ showPinyin ? line.pinyin : '' }}</span>
           <span class="poem-text">{{ line.text }}</span>
@@ -45,7 +59,7 @@ const showNotes = ref(true)
       </ol>
     </section>
 
-    <section v-if="showTranslation" id="translation" class="poem-section">
+    <section v-if="showTranslation" id="translation" class="poem-section translation-section">
       <h2>译文</h2>
       <p>{{ poem.translation }}</p>
     </section>
