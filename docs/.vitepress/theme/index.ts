@@ -14,7 +14,6 @@ import SimpleDataPage from './components/SimpleDataPage.vue'
 import ThemeToneToggle from './components/ThemeToneToggle.vue'
 import BackButton from './components/BackButton.vue'
 import ChineseHome from './components/ChineseHome.vue'
-import PoemDetail from './components/PoemDetail.vue'
 import FormulaReviewPage from './components/FormulaReviewPage.vue'
 import FormulaCard from './components/FormulaCard.vue'
 import ProgressBar from './components/ProgressBar.vue'
@@ -37,7 +36,6 @@ export default {
     app.component('ThemeToneToggle', ThemeToneToggle)
     app.component('BackButton', BackButton)
     app.component('ChineseHome', ChineseHome)
-    app.component('PoemDetail', PoemDetail)
     app.component('FormulaReviewPage', FormulaReviewPage)
     app.component('FormulaCard', FormulaCard)
     app.component('ProgressBar', ProgressBar)
