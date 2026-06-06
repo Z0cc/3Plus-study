@@ -6,6 +6,7 @@ const query = ref('')
 const activeCategory = ref('all')
 
 const categoryCounts = computed(() => Object.fromEntries(accumulationCategories.map((item) => [item.id, item.entries.length])))
+const totalCount = computed(() => accumulationCategories.reduce((sum, item) => sum + item.entries.length, 0))
 
 const visibleCategories = computed(() => {
   const keyword = query.value.trim().toLowerCase()
@@ -49,7 +50,7 @@ const resultCount = computed(() => visibleCategories.value.reduce((total, catego
     <nav class="accumulation-tabs" aria-label="资料分类">
       <button type="button" :class="{ active: activeCategory === 'all' }" @click="activeCategory = 'all'">
         <strong>全部内容</strong>
-        <span>{{ accumulationCategories.reduce((sum, item) => sum + item.entries.length, 0 }} 条</span>
+        <span>{{ totalCount }} 条</span>
       </button>
       <button v-for="category in accumulationCategories" :key="category.id" type="button" :class="{ active: activeCategory === category.id }" @click="activeCategory = category.id">
         <strong>{{ category.shortTitle }}</strong>
