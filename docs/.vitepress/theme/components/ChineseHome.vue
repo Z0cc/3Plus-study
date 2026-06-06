@@ -1,27 +1,79 @@
 <script setup>
 import { computed, ref } from 'vue'
-import { accumulationCategories } from '../../../data/chinese/accumulationData.js'
+import pronunciationRaw from '../../../data/chinese/full-pronunciation.txt?raw'
+import polyphonicRaw from '../../../data/chinese/full-polyphonic.txt?raw'
+import synonymsRaw from '../../../data/chinese/full-synonyms.txt?raw'
+import idiomsRaw1 from '../../../data/chinese/full-idioms-1.txt?raw'
+import idiomsRaw2 from '../../../data/chinese/full-idioms-2.txt?raw'
+import idiomsRaw3 from '../../../data/chinese/full-idioms-3.txt?raw'
 
 const query = ref('')
 const activeCategory = ref('all')
 
-const categoryCounts = computed(() => Object.fromEntries(accumulationCategories.map((item) => [item.id, item.entries.length])))
-const totalCount = computed(() => accumulationCategories.reduce((sum, item) => sum + item.entries.length, 0))
+const splitPages = (raw, startPage, mode) => raw.split(/\n\s*---PAGE---\s*\n/).map((text, index) => {
+  const pattern = mode === 'idioms' ? /(?=(?:【[A-Z]】\s*|\d+[.．]\s*))/g : /(?=【[A-Z]】\s*)/g
+  return {
+    page: startPage + index,
+    blocks: text.split(pattern).map((block) => block.trim()).filter(Boolean)
+  }
+})
 
+const categories = [
+  {
+    id: 'pronunciation',
+    shortTitle: '易错字音',
+    title: '常考易错字音',
+    description: '按字母顺序整理常考字音、读音与组词。',
+    pageRange: 'PDF 第 1—4 页',
+    pages: splitPages(pronunciationRaw, 1, 'letters')
+  },
+  {
+    id: 'polyphonic',
+    shortTitle: '多音字',
+    title: '常考多音字组词辨析',
+    description: '同一个字的不同读音、常见词语和使用区别。',
+    pageRange: 'PDF 第 5—14 页',
+    pages: splitPages(polyphonicRaw, 5, 'letters')
+  },
+  {
+    id: 'synonyms',
+    shortTitle: '近义词',
+    title: '近义词辨析',
+    description: '从含义、语体、适用对象和感情色彩辨清易混词。',
+    pageRange: 'PDF 第 15—24 页',
+    pages: splitPages(synonymsRaw, 15, 'letters')
+  },
+  {
+    id: 'idioms',
+    shortTitle: '常见成语',
+    title: '高考常见成语',
+    description: '保留资料中的成语释义、使用范围与易错提醒。',
+    pageRange: 'PDF 第 25—47 页',
+    pages: splitPages(`${idiomsRaw1}\n\n---PAGE---\n\n${idiomsRaw2}\n\n---PAGE---\n\n${idiomsRaw3}`, 25, 'idioms')
+  }
+]
+
+const totalPages = computed(() => categories.reduce((sum, category) => sum + category.pages.length, 0))
 const visibleCategories = computed(() => {
   const keyword = query.value.trim().toLowerCase()
-  return accumulationCategories
+  return categories
     .filter((category) => activeCategory.value === 'all' || category.id === activeCategory.value)
     .map((category) => ({
       ...category,
-      entries: keyword
-        ? category.entries.filter((entry) => [entry.term, entry.reading, entry.content, entry.note].join(' ').toLowerCase().includes(keyword))
-        : category.entries
+      pages: category.pages.map((page) => ({
+        ...page,
+        blocks: keyword
+          ? page.blocks.filter((block) => block.toLowerCase().includes(keyword))
+          : page.blocks
+      })).filter((page) => page.blocks.length)
     }))
-    .filter((category) => category.entries.length)
+    .filter((category) => category.pages.length)
 })
 
-const resultCount = computed(() => visibleCategories.value.reduce((total, category) => total + category.entries.length, 0))
+const resultCount = computed(() => visibleCategories.value.reduce(
+  (sum, category) => sum + category.pages.reduce((pageSum, page) => pageSum + page.blocks.length, 0),
+  0
+))
 </script>
 
 <template>
@@ -31,10 +83,10 @@ const resultCount = computed(() => visibleCategories.value.reduce((total, catego
       <div>
         <p class="accumulation-label">广东3+证书语文</p>
         <h1>语文日积月累</h1>
-        <p>把容易混淆、容易读错、需要反复看的基础知识分开整理，随时搜索，轻松早读。</p>
+        <p>完整收录早读资料中的易错字音、多音字、近义词辨析和常见成语，按原 PDF 页码整理。</p>
       </div>
       <div class="source-summary">
-        <strong>47 页资料</strong>
+        <strong>{{ totalPages }} 页完整资料</strong>
         <span>4 个复习分类</span>
       </div>
     </header>
@@ -42,19 +94,19 @@ const resultCount = computed(() => visibleCategories.value.reduce((total, catego
     <section class="accumulation-toolbar">
       <label class="accumulation-search">
         <span>搜索</span>
-        <input v-model="query" type="search" placeholder="输入字、词语、拼音或成语含义" />
+        <input v-model="query" type="search" placeholder="输入字、拼音、词语、成语或释义" />
       </label>
-      <span class="result-count">当前 {{ resultCount }} 条</span>
+      <span class="result-count">{{ query ? `找到 ${resultCount} 处内容` : 'PDF 全文' }}</span>
     </section>
 
     <nav class="accumulation-tabs" aria-label="资料分类">
       <button type="button" :class="{ active: activeCategory === 'all' }" @click="activeCategory = 'all'">
         <strong>全部内容</strong>
-        <span>{{ totalCount }} 条</span>
+        <span>{{ totalPages }} 页</span>
       </button>
-      <button v-for="category in accumulationCategories" :key="category.id" type="button" :class="{ active: activeCategory === category.id }" @click="activeCategory = category.id">
+      <button v-for="category in categories" :key="category.id" type="button" :class="{ active: activeCategory === category.id }" @click="activeCategory = category.id">
         <strong>{{ category.shortTitle }}</strong>
-        <span>{{ categoryCounts[category.id] }} 条</span>
+        <span>{{ category.pages.length }} 页</span>
       </button>
     </nav>
 
@@ -68,14 +120,12 @@ const resultCount = computed(() => visibleCategories.value.reduce((total, catego
           <span>{{ category.pageRange }}</span>
         </header>
 
-        <div class="accumulation-list">
-          <article v-for="entry in category.entries" :key="`${category.id}-${entry.term}`" class="accumulation-entry">
-            <div class="entry-word">
-              <strong>{{ entry.term }}</strong>
-              <span v-if="entry.reading">{{ entry.reading }}</span>
+        <div class="source-pages">
+          <article v-for="page in category.pages" :key="`${category.id}-${page.page}`" class="source-page">
+            <header><span>原资料</span><strong>第 {{ page.page }} 页</strong></header>
+            <div class="source-blocks">
+              <p v-for="(block, index) in page.blocks" :key="`${page.page}-${index}`" class="source-block">{{ block }}</p>
             </div>
-            <p class="entry-content">{{ entry.content }}</p>
-            <p class="entry-note">{{ entry.note }}</p>
           </article>
         </div>
       </section>
@@ -83,7 +133,7 @@ const resultCount = computed(() => visibleCategories.value.reduce((total, catego
 
     <section v-else class="accumulation-empty">
       <strong>没有找到相关内容</strong>
-      <p>换一个字、拼音或词语试试。</p>
+      <p>换一个字、拼音、词语或成语试试。</p>
     </section>
   </main>
 </template>
