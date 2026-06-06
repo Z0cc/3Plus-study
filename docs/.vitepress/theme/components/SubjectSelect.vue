@@ -2,7 +2,7 @@
 import { withBase } from 'vitepress'
 
 const subjects = [
-  { title: '语文', status: '已开放', href: '/chinese/', disabled: false, note: '古诗文测试' },
+  { title: '语文', status: '已开放', href: '/chinese/', disabled: false, note: '语文日积月累' },
   { title: '数学', status: '已开放', href: '/math/day1-formulas', disabled: false, note: '基础公式交互复习' },
   { title: '英语', status: '已开放', href: '/english/', disabled: false, note: '进入学习库' }
 ]
