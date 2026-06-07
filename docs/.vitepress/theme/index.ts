@@ -4,6 +4,7 @@ import './style.css'
 import './chinese.css'
 import './math.css'
 import './math-radical.css'
+import './live.css'
 import HomeLanding from './components/HomeLanding.vue'
 import SubjectSelect from './components/SubjectSelect.vue'
 import EnglishHome from './components/EnglishHome.vue'
@@ -17,6 +18,7 @@ import ChineseHome from './components/ChineseHome.vue'
 import FormulaReviewPage from './components/FormulaReviewPage.vue'
 import FormulaCard from './components/FormulaCard.vue'
 import ProgressBar from './components/ProgressBar.vue'
+import LiveStudio from './components/LiveStudio.vue'
 
 export default {
   extends: DefaultTheme,
@@ -39,5 +41,6 @@ export default {
     app.component('FormulaReviewPage', FormulaReviewPage)
     app.component('FormulaCard', FormulaCard)
     app.component('ProgressBar', ProgressBar)
+    app.component('LiveStudio', LiveStudio)
   }
 }
